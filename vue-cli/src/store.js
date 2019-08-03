@@ -82,7 +82,35 @@ export default new Vuex.Store({
 				delete axios.defaults.headers.common['Authorization']
 				resolve()
 			})
-		}
+		},
+		post({commit}){
+			
+			return new Promise((resolve, reject) => {
+				commit('auth_request')
+				axios({url: 'http://127.0.0.1:3000/api/home', method: 'POST' })
+				.then(resp => {
+
+					//const token = JSON.stringify(resp.data.token)
+					//const user = JSON.stringify(resp.data.user)
+
+					//alert(user);
+					//localStorage.setItem('token', token)
+					//localStorage.setItem('user', user)
+	                // Add the following line:
+	                axios.defaults.headers.common['Authorization'] = token
+	                commit('auth_success', token, user)
+	                resolve(resp)
+
+	                
+	            })
+				.catch(err => {
+					commit('auth_error')
+					localStorage.removeItem('token')
+					reject(err)
+				})
+			})
+		},
+
 	},
 	getters : {
 		isLoggedIn: state => !!state.token,

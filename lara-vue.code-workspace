@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "lara-api"
+		},
+		{
+			"path": "vue-cli"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
